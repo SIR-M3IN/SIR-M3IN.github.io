@@ -7,7 +7,7 @@ var enemyspeed = 2;
 
 function handleOrientation(event) {
     var beta = event.beta;
-    var newPositionX = window.innerWidth / 2 + beta*10;
+    var newPositionX = window.innerWidth / 2 + beta * 10;
 
     if (newPositionX !== currentPositionX) {
         currentPositionX = newPositionX;
@@ -19,26 +19,27 @@ function handleOrientation(event) {
     }
 }
 
-setInterval(function() {createMovingSquare();enemyspeed += 0.05;}, 3000);
+setInterval(function () {
+    createMovingSquare();
+    enemyspeed += 0.05;
+}, 3000);
 
 function createMovingSquare() {
     var randomX = Math.floor(Math.random() * window.innerWidth);
-    var newSquare = document.createElement('div');
-    newSquare.className = 'enemy';
-    newSquare.style.left = randomX + 'px';
-    newSquare.style.top = '-100px';
-    newSquare.style.display = 'block';
-    document.body.appendChild(newSquare);
-  
+    var enemy = document.createElement('div');
+    enemy.className = 'enemy';
+    enemy.style.left = randomX + 'px';
+    enemy.style.display = 'block';
+    document.body.appendChild(enemy);
 
-    moveDown(newSquare);
+    moveDown(enemy);
 }
-
 
 function moveDown(square) {
     var positionY = 0;
 
     function frame() {
+        checkCollision(square);
         positionY += enemyspeed;
         square.style.top = positionY + 'px';
         checkCollision(square);
@@ -52,6 +53,7 @@ function moveDown(square) {
     requestAnimationFrame(frame);
 }
 
+var collisionEnabled = false;
 
 function checkCollision(square) {
     var squareRect = square.getBoundingClientRect();
