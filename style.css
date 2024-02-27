@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#gyroData {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.player {
+    width: 50px;
+    height: 100px;
+    background-image: url('Auto.png');
+    background-size: cover;
+    position: absolute;
+}
+
+.enemy {
+    width: 70px;
+    height: 70px;
+    background-color: red;
+    position: absolute;
+    display: none;
+}
+
+#startButton {
+    display: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
