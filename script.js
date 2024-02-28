@@ -15,8 +15,15 @@ function handleOrientation(event) {
 }
 
 function createEnemy() {
-    const enemy = document.querySelector('.enemy');
-    enemy.style.left = `${Math.random() * (window.innerWidth - 30)}px`; // Zufällige horizontale Position
+    const existingEnemies = document.querySelectorAll('.enemy');
+    existingEnemies.forEach((enemy) => {
+        enemy.remove();
+    });
+
+    const enemy = document.createElement('div');
+    enemy.className = 'enemy';
+    enemy.style.left = `${Math.random() * (window.innerWidth - 30)}px`;
+    document.body.appendChild(enemy);
 
     const enemyInterval = setInterval(() => {
         const enemyRect = enemy.getBoundingClientRect();
@@ -26,6 +33,7 @@ function createEnemy() {
         }
     }, 100);
 }
+
 
 function checkCollision(enemy) {
     const playerRect = player.getBoundingClientRect();
@@ -41,7 +49,7 @@ function checkCollision(enemy) {
 }
 
 function gameOver() {
-    window.location.href = 'startscreen.html';
+    window.location.href = 'index.html';
 }
 
 setInterval(createEnemy, 2000);
