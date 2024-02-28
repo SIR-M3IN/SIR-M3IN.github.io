@@ -35,18 +35,24 @@ function createEnemy() {
 }
 
 
-function checkCollision(enemy) {
+function checkCollision() {
     const playerRect = player.getBoundingClientRect();
-    const enemyRect = enemy.getBoundingClientRect();
+    
+    const enemies = document.querySelectorAll('.enemy');
+    enemies.forEach((enemy) => {
+        const enemyRect = enemy.getBoundingClientRect();
 
-    if (
-        playerRect.top < enemyRect.bottom &&
-        playerRect.right > enemyRect.left &&
-        playerRect.left < enemyRect.right
-    ) {
-        gameOver();
-    }
+        if (
+            playerRect.top < enemyRect.bottom &&
+            playerRect.bottom > enemyRect.top &&
+            playerRect.right > enemyRect.left &&
+            playerRect.left < enemyRect.right
+        ) {
+            gameOver();
+        }
+    });
 }
+
 
 function gameOver() {
     window.location.href = 'index.html';
