@@ -1,75 +1,58 @@
-window.addEventListener('deviceorientation', handleOrientation, false);
+window.addEventListener('deviceorientation', handleOrientation);
 
-var currentPositionX = 0;
-var playerWidth = 50;
-var playerHeight = 50;
-var enemyspeed = 2;
+const player = document.getElementById('player');
+let playerX = 50; // Initial position
 
 function handleOrientation(event) {
-    var beta = event.beta;
-    var newPositionX = window.innerWidth / 2 + beta * 10;
+    // Gyroscope controls
+    const tilt = event.gamma; // Get the gamma value for left and right movement
+    playerX += tilt / 5; // Adjust the player position based on the tilt
+    player.style.left = `${playerX}%`;
 
-    if (newPositionX !== currentPositionX) {
-        currentPositionX = newPositionX;
-
-        var player = document.querySelector('.player');
-        player.style.left = currentPositionX + "px";
-
-        checkCollision(player);
+    // Ensure the player stays within the window boundaries
+    if (playerX < 0) {
+        playerX = 0;
+    } else if (playerX > 100) {
+        playerX = 100;
     }
 }
 
-setInterval(function () {
-    createMovingSquare();
-    enemyspeed += 0.05;
-}, 3000);
+function createEnemy() {
+    const enemy = document.querySelector('.enemy');
+    enemy.style.left = `${Math.random() * 100}%`; // Zufällige horizontale Position
 
-function createMovingSquare() {
-    var randomX = Math.floor(Math.random() * window.innerWidth);
-    var enemy = document.createElement('div');
-    enemy.className = 'enemy';
-    enemy.style.left = randomX + 'px';
-    enemy.style.display = 'block';
-    document.body.appendChild(enemy);
-
-    moveDown(enemy);
-}
-
-function moveDown(square) {
-    var positionY = 0;
-
-    function frame() {
-        checkCollision(square);
-        positionY += enemyspeed;
-        square.style.top = positionY + 'px';
-        checkCollision(square);
-        if (positionY < window.innerHeight) {
-            requestAnimationFrame(frame);
-        } else {
-            square.remove();
+    const enemyInterval = setInterval(() => {
+        const enemyRect = enemy.getBoundingClientRect();
+        if (enemyRect.top > window.innerHeight) {
+            enemy.remove();
+            clearInterval(enemyInterval);
         }
-    }
-
-    requestAnimationFrame(frame);
+    }, 100);
 }
 
-var collisionEnabled = false;
-
-function checkCollision(square) {
-    var squareRect = square.getBoundingClientRect();
-    var playerRect = {
-        left: currentPositionX,
-        top: window.innerHeight - playerHeight,
-        right: currentPositionX + playerWidth,
-        bottom: window.innerHeight
-    };
+function checkCollision(enemy) {
+    const playerRect = player.getBoundingClientRect();
+    const enemyRect = enemy.getBoundingClientRect();
 
     if (
-        squareRect.left < playerRect.right &&
-        squareRect.right > playerRect.left &&
-        squareRect.top < playerRect.bottom &&
-        squareRect.bottom > playerRect.top
+        playerRect.top < enemyRect.bottom &&
+        playerRect.right > enemyRect.left &&
+        playerRect.left < enemyRect.right
     ) {
-        window.location.href = 'startscreen.html';
+        gameOver();
     }
 }
+
+function gameOver() {
+    window.location.href = 'startscreen.html';
+    
+}
+
+setInterval(createEnemy, 2000);
+setInterval(() => {
+    const enemies = document.querySelectorAll('.enemy');
+    enemies.forEach((enemy) => {
+        checkCollision(enemy);
+    });
+}, 100);
+//window.location.href = 'startscreen.html';
