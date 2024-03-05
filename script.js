@@ -33,7 +33,6 @@ function createEnemy() {
     const enemy = document.createElement('div');
     enemy.className = 'enemy';
     enemy.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
-    enemy.style.top = `${-300}px`;
 
     const enemyImage = document.createElement('img');
     enemyImage.src = randomAsteroid;
