@@ -32,11 +32,16 @@ function createEnemy() {
 
     const enemy = document.createElement('div');
     enemy.className = 'enemy';
-    enemy.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
+    enemy.style.left = `${Math.random() * (window.innerWidth - enemy.clientWidth)}px`;
 
     const enemyImage = document.createElement('img');
     enemyImage.src = randomAsteroid;
     enemy.appendChild(enemyImage);
+
+    // Set height and width after creating the enemy element
+    var randomNumber = Math.floor(Math.random() * 100 + 100);
+    enemy.style.height = `${randomNumber}px`;
+    enemy.style.width = `${randomNumber}px`;
 
     document.body.appendChild(enemy);
 
@@ -47,8 +52,6 @@ function createEnemy() {
             clearInterval(enemyInterval);
         }
     }, 50);
-    const playerUFO = document.getElementById('player').querySelector('img');
-    playerUFO.src = randomUfo;
 }
 
 
@@ -76,7 +79,6 @@ function checkCollision() {
         }
     });
 }
-
 
 function gameOver() {
     window.location.href = 'index.html';

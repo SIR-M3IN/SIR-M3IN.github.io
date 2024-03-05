@@ -22,7 +22,8 @@ body {
     position: absolute;
     width: 200px;
     height: 200px;
-    animation: fall 3.3s linear infinite;
+    animation: fall 2s linear infinite;
+    left: 200px;
 }
 
 .enemy img {
