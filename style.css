@@ -20,9 +20,9 @@ body {
 
 .enemy { 
     position: absolute;
-    width: 180px;
-    height: 180px;
-    animation: fall 3s linear infinite;
+    width: 200px;
+    height: 200px;
+    animation: fall 3.3s linear infinite;
 }
 
 .enemy img {
@@ -32,7 +32,7 @@ body {
 }
 
 @keyframes fall {
-    from { top: -200px; }
+    from { top: -230px; }
     to { top: 130vh; }
 }
 further

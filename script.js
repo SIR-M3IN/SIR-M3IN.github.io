@@ -61,16 +61,22 @@ function checkCollision() {
     enemies.forEach((enemy) => {
         const enemyRect = enemy.getBoundingClientRect();
 
+        const playerTop = playerRect.top + 15;
+        const playerBottom = playerRect.bottom - 15;
+        const playerLeft = playerRect.left + 15;
+        const playerRight = playerRect.right - 15;
+
         if (
-            playerRect.top < enemyRect.bottom &&
-            playerRect.bottom > enemyRect.top &&
-            playerRect.right > enemyRect.left &&
-            playerRect.left < enemyRect.right
+            playerTop < enemyRect.bottom &&
+            playerBottom > enemyRect.top &&
+            playerRight > enemyRect.left &&
+            playerLeft < enemyRect.right
         ) {
             gameOver();
         }
     });
 }
+
 
 function gameOver() {
     window.location.href = 'index.html';
