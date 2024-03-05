@@ -1,12 +1,13 @@
 body {
     margin: 0;
     overflow: hidden;
+    background-color: #310350;
 }
 
 #player {
     position: absolute;
-    width: 38px;
-    height: 85px;
+    width: 130px;
+    height: 70px;
     bottom: 8vh;
     transition: 0.1s;
 }
@@ -14,15 +15,20 @@ body {
 #player img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .enemy {
     position: absolute;
-    width: 150px;
-    height: 30px;
-    background-color: red;
+    width: 200px;
+    height: 200px;
     animation: fall 2s linear infinite;
+}
+
+.enemy img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }
 
 @keyframes fall {
