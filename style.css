@@ -43,12 +43,17 @@ body {
 
 .startButton {
     display: flex;
+    
     height: 20vh;
     width: 20vw;
     margin-top: 40vh;
     margin-left: 40vw;
+    
 }
 
 .bt {
     width: 20vw;
+    border-radius: 20px;
+    background-color: blueviolet;
+    border: 3px white solid;
 }
