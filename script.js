@@ -2,7 +2,7 @@ window.addEventListener('deviceorientation', handleOrientation);
 
 const player = document.getElementById('player');
 let currentPositionX = window.innerWidth / 2;
-
+let asteroidCount = 0;
 const ufoOptions = [
     'images/ufo-for-website_blue.svg',
     'images/ufo-for-website_green.svg',
@@ -23,6 +23,8 @@ function handleOrientation(event) {
 }
 
 function createEnemy() {
+    asteroidCount++;
+
     const existingEnemies = document.querySelectorAll('.enemy');
     existingEnemies.forEach((enemy) => {
         enemy.remove();
@@ -32,13 +34,15 @@ function createEnemy() {
 
     const enemy = document.createElement('div');
     enemy.className = 'enemy';
-    enemy.style.left = `${Math.random() * (window.innerWidth - enemy.clientWidth)}px`;
+
+    enemy.style.left = `${Math.max(0, Math.random() * (window.innerWidth - enemy.clientWidth))}px`;
+
+    enemy.style.transform = `rotate(${Math.random() * 360}deg)`;
 
     const enemyImage = document.createElement('img');
     enemyImage.src = randomAsteroid;
     enemy.appendChild(enemyImage);
 
-    // Set height and width after creating the enemy element
     var randomNumber = Math.floor(Math.random() * 100 + 100);
     enemy.style.height = `${randomNumber}px`;
     enemy.style.width = `${randomNumber}px`;
@@ -53,7 +57,6 @@ function createEnemy() {
         }
     }, 50);
 }
-
 
 
 

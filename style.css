@@ -58,3 +58,12 @@ body {
     background-color: blueviolet;
     border: 3px white solid;
 }
+
+#counter-display {
+    position: absolute;
+    top: 4vh;
+    right: 4vw; 
+    font-weight: bold;
+    color: white;
+    font-size: 24px; 
+}
