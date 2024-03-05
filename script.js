@@ -23,8 +23,6 @@ function handleOrientation(event) {
 }
 
 function createEnemy() {
-    asteroidCount++;
-
     const existingEnemies = document.querySelectorAll('.enemy');
     existingEnemies.forEach((enemy) => {
         enemy.remove();
@@ -52,6 +50,9 @@ function createEnemy() {
     const enemyInterval = setInterval(() => {
         const enemyRect = enemy.getBoundingClientRect();
         if (enemyRect.top > window.innerHeight) {
+            asteroidCount++;
+            const counterDisplay = document.getElementById('counter-display');
+            counterDisplay.textContent = `Asteroids: ${asteroidCount}`;
             enemy.remove();
             clearInterval(enemyInterval);
         }
