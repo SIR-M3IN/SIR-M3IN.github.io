@@ -16,7 +16,7 @@ playerPicture.src = randomUfo;
 function handleOrientation(event) {
     // Gyroscope controls
     const beta = event.beta;
-    const newPositionX = window.innerWidth / 2 + beta * 10 - player.clientWidth / 2;
+    const newPositionX = window.innerWidth / 2 + beta * 14 - player.clientWidth / 2;
     currentPositionX = Math.max(0, Math.min(newPositionX, window.innerWidth - player.clientWidth));
     
     player.style.left = currentPositionX + "px";
